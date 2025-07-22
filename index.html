@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conversor de Escala Brickadia</title>
+  <title>Conversor / Converter Brickadia</title>
   <style>
     body {
       font-family: sans-serif;
@@ -16,7 +15,7 @@
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
     }
     h1 {
@@ -80,163 +79,236 @@
       text-align: center;
       color: #0f172a;
     }
+    .lang-toggle {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .lang-toggle button {
+      width: auto;
+      padding: 0.5rem 1rem;
+      background-color: #e2e8f0;
+      color: #0f172a;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .lang-toggle button:hover {
+      background-color: #cbd5e1;
+    }
+    .en { display: none; }
+    .lang-en .es { display: none; }
+    .lang-en .en { display: inline; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Conversor de Escala Brickadia</h1>
-
-    <div class="section">
-      <h2>Conversión de Escala</h2>
-      <p class="info">Introduce una medida en studs, ladrillos o placas y compárala con la altura de una figura a escala para conocer la escala proporcional.</p>
-
-      <!-- Entrada de medida y unidad -->
-      <div class="form-row">
-        <div class="form-group">
-          <label>Medida</label>
-          <input type="number" id="value" placeholder="Ej. 10" />
-        </div>
-        <div class="form-group">
-          <label>Unidad</label>
-          <select id="unit">
-            <option value="stud">Stud</option>
-            <option value="brick">Ladrillo</option>
-            <option value="plate">Placa</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Entrada de altura de figura y unidad -->
-      <div class="form-row">
-        <div class="form-group">
-          <label>Altura de la figura</label>
-          <input type="number" id="height" value="9" />
-        </div>
-        <div class="form-group">
-          <label>Unidad de altura</label>
-          <select id="heightUnit">
-            <option value="mm">mm</option>
-            <option value="cm" selected>cm</option>
-            <option value="m">m</option>
-            <option value="in">pulgadas</option>
-            <option value="ft">pies</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Selección de tipo de figura con ajuste automático de altura -->
-      <div class="form-group">
-        <label>Tipo de figura</label>
-        <select id="scale" onchange="setFigureHeight()">
-          <option value="technic">Grande (Technic - 9 cm)</option>
-          <option value="minifig">Mediana (Minifig - 4 cm)</option>
-          <option value="mini">Pequeña (Miniatura - 2 cm)</option>
-        </select>
-      </div>
-
-      <button onclick="convert()">Convertir escala</button>
-      <div class="result" id="result"></div>
+  <div class="container" id="container">
+    <div class="lang-toggle">
+      <button onclick="toggleLanguage()">EN/ES</button>
     </div>
-
-    <div class="section">
-      <h2>Calculadora de Bloques</h2>
-      <p class="info">Calcula cuántos bloques caben en una línea de longitud conocida. Puedes especificar el tamaño del bloque como 1x1, 2x2, 3x1, etc.</p>
-
-      <!-- Entrada de longitud y tamaño del bloque -->
-      <div class="form-row">
-        <div class="form-group">
-          <label>Longitud en cm</label>
-          <input type="number" id="lengthCm" placeholder="Ej. 20" />
-        </div>
-        <div class="form-group">
-          <label>Tamaño del bloque (Studs)</label>
-          <input type="text" id="studSize" placeholder="Ej. 2x2, 3x1" value="1x1" />
-        </div>
-      </div>
-
-      <button onclick="calculateBlocks()">Calcular bloques</button>
-      <div class="result" id="blockResult"></div>
+    <h1><span class="es">Conversor de Escala (Brickadia)</span><span class="en">Scale Converter (Brickadia)</span></h1><div class="section">
+  <h2><span class="es">Conversión de Escala</span><span class="en">Scale Conversion</span></h2>
+  <p class="info">
+    <span class="es">Introduce una medida en studs, ladrillos o placas y compárala con la altura de una figura a escala para conocer la escala proporcional.</span>
+    <span class="en">Enter a measurement in studs, bricks or plates and compare it to the figure height to know the proportional scale.</span>
+  </p>
+  <div class="form-row">
+    <div class="form-group">
+      <label><span class="es">Medida</span><span class="en">Measurement</span></label>
+      <input type="number" id="value" placeholder="Ej. / e.g. 10" />
+    </div>
+    <div class="form-group">
+      <label><span class="es">Unidad</span><span class="en">Unit</span></label>
+      <select id="unit">
+        <option value="stud">Stud</option>
+        <option value="brick">Ladrillo / Brick</option>
+        <option value="plate">Placa / Plate</option>
+      </select>
     </div>
   </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label><span class="es">Altura de la figura</span><span class="en">Figure Height</span></label>
+      <input type="number" id="height" value="9" />
+    </div>
+    <div class="form-group">
+      <label><span class="es">Unidad de altura</span><span class="en">Height Unit</span></label>
+      <select id="heightUnit">
+        <option value="mm">mm</option>
+        <option value="cm" selected>cm</option>
+        <option value="m">m</option>
+        <option value="in">inches</option>
+        <option value="ft">feet</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label><span class="es">Tipo de figura</span><span class="en">Figure Type</span></label>
+    <select id="scale" onchange="setFigureHeight()">
+      <option value="technic">Grande (Technic - 9 cm)</option>
+      <option value="minifig">Mediana (Minifig - 4 cm)</option>
+      <option value="mini">Pequeña (Miniatura - 2 cm)</option>
+    </select>
+  </div>
+  <button onclick="convert()"><span class="es">Convertir escala</span><span class="en">Convert Scale</span></button>
+  <div class="result" id="result"></div>
+</div>
 
-  <script>
-    // Cambia automáticamente la altura según el tipo de figura seleccionado
-    function setFigureHeight() {
-      const scale = document.getElementById('scale').value;
-      const heightField = document.getElementById('height');
-      const unitField = document.getElementById('heightUnit');
+<div class="section">
+  <h2><span class="es">Calculadora de Bloques</span><span class="en">Block Calculator</span></h2>
+  <p class="info">
+    <span class="es">Calcula cuántos bloques caben en una línea de longitud conocida.</span>
+    <span class="en">Calculate how many blocks fit in a known-length line.</span>
+  </p>
+  <div class="form-row">
+    <div class="form-group">
+      <label><span class="es">Longitud</span><span class="en">Length</span></label>
+      <input type="number" id="lengthCm" placeholder="Ej. / e.g. 20" />
+    </div>
+    <div class="form-group">
+      <label><span class="es">Unidad</span><span class="en">Unit</span></label>
+      <select id="lengthUnit">
+        <option value="mm">mm</option>
+        <option value="cm" selected>cm</option>
+        <option value="m">m</option>
+        <option value="in">inches</option>
+        <option value="ft">feet</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label><span class="es">Tamaño del bloque (Studs)</span><span class="en">Block size</span></label>
+      <input type="text" id="studSize" placeholder="Ej. 2x2, 3x1" value="1x1" />
+    </div>
+  </div>
+  <button onclick="calculateBlocks()"><span class="es">Calcular bloques</span><span class="en">Calculate Blocks</span></button>
+  <div class="result" id="blockResult"></div>
 
-      if (scale === 'minifig') {
-        heightField.value = 4;
-        unitField.value = 'cm';
-      } else if (scale === 'technic') {
-        heightField.value = 9;
-        unitField.value = 'cm';
-      } else if (scale === 'mini') {
-        heightField.value = 2;
-        unitField.value = 'cm';
-      }
+  <p class="info" style="margin-top:2rem">
+    <span class="es">O calcula la longitud según número de bloques y tamaño</span>
+    <span class="en">Or calculate the length given number of blocks and size</span>
+  </p>
+  <div class="form-row">
+    <div class="form-group">
+      <label><span class="es">Número de bloques</span><span class="en">Number of blocks</span></label>
+      <input type="number" id="blockCount" placeholder="Ej. 10" />
+    </div>
+    <div class="form-group">
+      <label><span class="es">Tamaño del bloque</span><span class="en">Block size</span></label>
+      <input type="text" id="studSize2" placeholder="Ej. 2x2" value="1x1" />
+    </div>
+    <div class="form-group">
+      <label><span class="es">Unidad de salida</span><span class="en">Output unit</span></label>
+      <select id="outputUnit">
+        <option value="mm">mm</option>
+        <option value="cm" selected>cm</option>
+        <option value="m">m</option>
+        <option value="in">inches</option>
+        <option value="ft">feet</option>
+      </select>
+    </div>
+  </div>
+  <button onclick="calculateLength()"><span class="es">Calcular longitud</span><span class="en">Calculate Length</span></button>
+  <div class="result" id="lengthResult"></div>
+</div>
+
+  </div>
+<script>
+  function toggleLanguage() {
+    document.body.classList.toggle('lang-en');
+  }
+
+  function setFigureHeight() {
+    const scale = document.getElementById('scale').value;
+    const heightField = document.getElementById('height');
+    const unitField = document.getElementById('heightUnit');
+    if (scale === 'minifig') {
+      heightField.value = 4;
+      unitField.value = 'cm';
+    } else if (scale === 'technic') {
+      heightField.value = 9;
+      unitField.value = 'cm';
+    } else if (scale === 'mini') {
+      heightField.value = 2;
+      unitField.value = 'cm';
     }
+  }
 
-    // Convierte una medida a metros y calcula la escala en relación a una figura
-    function convert() {
-      const value = parseFloat(document.getElementById('value').value);
-      const unit = document.getElementById('unit').value;
-      const height = parseFloat(document.getElementById('height').value);
-      const heightUnit = document.getElementById('heightUnit').value;
-      const scale = document.getElementById('scale').value;
-
-      if (isNaN(value) || isNaN(height)) {
-        document.getElementById('result').innerText = "Por favor, introduce valores válidos.";
-        return;
-      }
-
-      // Conversión a metros según unidad
-      const conversions = {
-        stud: 0.008,
-        brick: 0.0096,
-        plate: 0.0032
-      };
-
-      const heightToMeters = {
-        mm: height / 1000,
-        cm: height / 100,
-        m: height,
-        in: height * 0.0254,
-        ft: height * 0.3048,
-      };
-
-      const baseMeters = value * conversions[unit];
-      const figureHeight = heightToMeters[heightUnit];
-      const scaleRatio = baseMeters / figureHeight;
-
-      document.getElementById('result').innerText =
-        `La medida equivale a ${baseMeters.toFixed(3)} metros. La escala respecto a la figura (${scale}) es aproximadamente 1:${scaleRatio.toFixed(1)}.`;
+  function convert() {
+    const value = parseFloat(document.getElementById('value').value);
+    const unit = document.getElementById('unit').value;
+    const height = parseFloat(document.getElementById('height').value);
+    const heightUnit = document.getElementById('heightUnit').value;
+    if (isNaN(value) || isNaN(height) || value <= 0 || height <= 0) {
+      document.getElementById('result').innerText = document.body.classList.contains('lang-en') ?
+        "Enter valid values." : "Introduce valores válidos.";
+      return;
     }
+    const conversions = { stud: 0.008, brick: 0.0096, plate: 0.0032 };
+    const heightToMeters = {
+      mm: height / 1000,
+      cm: height / 100,
+      m: height,
+      in: height * 0.0254,
+      ft: height * 0.3048,
+    };
+    const baseMeters = value * conversions[unit];
+    const figureHeight = heightToMeters[heightUnit];
+    const scaleRatio = baseMeters / figureHeight;
+    const roundedRatio = Math.round(scaleRatio);
+    document.getElementById('result').innerText = document.body.classList.contains('lang-en') ?
+      `${baseMeters.toFixed(3)} meters. Scale: 1:${roundedRatio}` :
+      `Equivale a ${baseMeters.toFixed(3)} metros. Escala: 1:${roundedRatio}`;
+  }
 
-    // Calcula cuántos bloques caben en una longitud dada
-    function calculateBlocks() {
-      const lengthCm = parseFloat(document.getElementById('lengthCm').value);
-      const studSize = document.getElementById('studSize').value.trim().toLowerCase();
-      const match = studSize.match(/^(\d+)x(\d+)$/);
-
-      if (isNaN(lengthCm) || lengthCm <= 0 || !match) {
-        document.getElementById('blockResult').innerText = "Introduce una longitud válida en cm y un tamaño válido como 2x2, 3x1, etc.";
-        return;
-      }
-
-      const widthStuds = parseInt(match[1]);
-      const lengthStuds = parseInt(match[2]);
-
-      const totalLengthMm = lengthCm * 10; // convertir cm a mm
-      const studLengthMm = 8; // 1 stud = 8 mm
-      const blockLengthMm = lengthStuds * studLengthMm; // longitud del bloque en mm
-
-      const numberOfBlocks = totalLengthMm / blockLengthMm;
-
-      document.getElementById('blockResult').innerText =
-        `Una línea de ${lengthCm} cm equivale a aproximadamente ${numberOfBlocks.toFixed(1)} bloques de tamaño ${widthStuds}x${lengthStuds} studs.`;
+  function calculateBlocks() {
+    const length = parseFloat(document.getElementById('lengthCm').value);
+    const lengthUnit = document.getElementById('lengthUnit').value;
+    const studSize = document.getElementById('studSize').value.trim().toLowerCase();
+    const match = studSize.match(/^(\d+)x(\d+)$/);
+    if (isNaN(length) || length <= 0 || !match) {
+      document.getElementById('blockResult').innerText = document.body.classList.contains('lang-en') ?
+        "Enter valid length and block size." : "Introduce longitud y tamaño válidos.";
+      return;
     }
-  </script>
-</body>
+    const unitToMm = {
+      mm: length,
+      cm: length * 10,
+      m: length * 1000,
+      in: length * 25.4,
+      ft: length * 304.8,
+    };
+    const totalLengthMm = unitToMm[lengthUnit];
+    const lengthStuds = parseInt(match[2]);
+    const blockLengthMm = lengthStuds * 8;
+    const numberOfBlocks = totalLengthMm / blockLengthMm;
+    document.getElementById('blockResult').innerText = document.body.classList.contains('lang-en') ?
+      `${length} ${lengthUnit} ≈ ${numberOfBlocks.toFixed(1)} blocks of ${studSize} studs.` :
+      `${length} ${lengthUnit} ≈ ${numberOfBlocks.toFixed(1)} bloques de ${studSize} studs.`;
+  }
+
+  function calculateLength() {
+    const count = parseFloat(document.getElementById('blockCount').value);
+    const size = document.getElementById('studSize2').value.trim().toLowerCase();
+    const outputUnit = document.getElementById('outputUnit').value;
+    const match = size.match(/^(\d+)x(\d+)$/);
+    if (isNaN(count) || count <= 0 || !match) {
+      document.getElementById('lengthResult').innerText = document.body.classList.contains('lang-en') ?
+        "Enter valid block number and size." : "Introduce número y tamaño válidos.";
+      return;
+    }
+    const studs = parseInt(match[2]);
+    const totalLengthMm = count * studs * 8;
+    let result = 0;
+    switch (outputUnit) {
+      case "mm": result = totalLengthMm; break;
+      case "cm": result = totalLengthMm / 10; break;
+      case "m": result = totalLengthMm / 1000; break;
+      case "in": result = totalLengthMm / 25.4; break;
+      case "ft": result = totalLengthMm / 304.8; break;
+    }
+    document.getElementById('lengthResult').innerText = document.body.classList.contains('lang-en') ?
+      `${count} blocks of ${size} = ${result.toFixed(1)} ${outputUnit}` :
+      `${count} bloques de ${size} = ${result.toFixed(1)} ${outputUnit}`;
+  }
+</script></body>
 </html>
