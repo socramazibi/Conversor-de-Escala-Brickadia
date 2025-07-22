@@ -34,7 +34,7 @@ Introduce una longitud y un tamaño de bloque como `2x2`, `3x1`, etc., y obtendr
 🎮 Diseñado para la comunidad de jugadores y constructores de **Brickadia**.
 
 
-#######
+#######  English  #######
 
 # 🧱 Brickadia Scale Converter
 
