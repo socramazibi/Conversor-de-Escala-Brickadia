@@ -1,5 +1,5 @@
 # 🧱 Conversor de Escala Brickadia
-
+https://socramazibi.github.io/Conversor-de-Escala-Brickadia/
 Esta es una herramienta web interactiva para calcular proporciones y bloques dentro del juego **Brickadia**. Funciona completamente en el navegador, sin necesidad de instalación.
 
 ## 🔍 ¿Qué puedes hacer con esta herramienta?
